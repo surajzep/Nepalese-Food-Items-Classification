@@ -1,0 +1,4 @@
+data/
+.vscode
+food-classifier-env
+.ipynb_checkpoints
