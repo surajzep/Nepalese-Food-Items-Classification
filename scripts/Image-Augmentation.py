@@ -41,6 +41,7 @@ def augment_images(start_load_index,start_save_index):
             
             for rotated_image in rotated_images:
                 
+                
                 imageio.imwrite(("../data/processed/"+item+"/item"+str(save_index)+".jpg"),rotated_image )
                 save_index=save_index+1
                 
