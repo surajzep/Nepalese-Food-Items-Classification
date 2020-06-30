@@ -1,11 +1,9 @@
 import os
 import cv2
-import matplotlib.pyplot as plt
 
 
 def preprocess_train_images(img):
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    resized_img=cv2.resize(gray,(256,256))
+    resized_img=cv2.resize(img,(224,224))
     return resized_img
 
 
@@ -18,11 +16,21 @@ try:
 except OSError as error:
     print(error)
 
+    
+rgb_dir="RGB" 
+
+rgb_path=os.path.join(processed_path,rgb_dir)
+try:
+    os.mkdir(rgb_path)
+    
+except OSError as error:
+    print(error)
+    
 train_dir="train"
 test_dir="test"
 
-processed_train_path=os.path.join(processed_path,train_dir)
-processed_test_path=os.path.join(processed_path,test_dir)
+processed_train_path=os.path.join(rgb_path,train_dir)
+processed_test_path=os.path.join(rgb_path,test_dir)
 
 try:
     os.mkdir(processed_train_path)
@@ -34,11 +42,11 @@ try:
     os.mkdir(processed_test_path)
     
 except OSError as error:
-    print(error)    
-
+    print(error)
     
+
 for item in os.listdir('../data/raw/train'):
-    parent_dir="../data/processed/train"
+    parent_dir="../data/processed/RGB/train"
     path=os.path.join(parent_dir,item)
     try:
         os.mkdir(path)
@@ -51,13 +59,11 @@ for item in os.listdir('../data/raw/train'):
         loaded_img=cv2.imread(img_path)
         processed_img=preprocess_train_images(loaded_img)
         saving_filename="item"+str(c)+".jpg"
-        cv2.imwrite(os.path.join(path,saving_filename),processed_img)
-        
-        
-        
-        
+        cv2.imwrite(os.path.join(path, saving_filename), processed_img)
+
+
 for item in os.listdir('../data/raw/test'):
-    parent_dir="../data/processed/test"
+    parent_dir="../data/processed/RGB/test"
     path=os.path.join(parent_dir,item)
     try:
         os.mkdir(path)
@@ -70,4 +76,4 @@ for item in os.listdir('../data/raw/test'):
         loaded_img=cv2.imread(img_path)
         processed_img=preprocess_train_images(loaded_img)
         saving_filename="item"+str(c)+".jpg"
-        cv2.imwrite(os.path.join(path,saving_filename),processed_img)        
+        cv2.imwrite(os.path.join(path,saving_filename),processed_img)            
