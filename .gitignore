@@ -2,3 +2,4 @@ data/processed
 .vscode
 food-classifier-env
 .ipynb_checkpoints
+.pyc
